@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de Población</title>
+</head>
+<body>
+  <h1>Calculadora de Población</h1>
+
+  <form id="populationForm">
+    <label for="initialPopulation">Población Inicial (p):</label>
+    <input type="number" id="initialPopulation" required>
+
+    <label for="time">Tiempo (t):</label>
+    <input type="number" id="time" required>
+
+    <label for="doubleTime">Tiempo de Duplicación (d):</label>
+    <input type="number" id="doubleTime" required>
+
+    <label for="finalPopulation">Población Final (P):</label>
+    <input type="text" id="finalPopulation" readonly>
+
+    <button type="submit">Calcular</button>
+  </form>
+
+  <script>
+    // Función para calcular la población final (P)
+    function calculateFinalPopulation(initialPopulation, time, doubleTime) {
+      return initialPopulation * Math.pow(2, time / doubleTime);
+    }
+
+    // Función para manejar el envío del formulario
+    function handleFormSubmit(event) {
+      event.preventDefault(); // Evitar que la página se recargue
+
+      // Obtener los valores del formulario
+      const initialPopulation = parseFloat(document.getElementById("initialPopulation").value);
+      const time = parseFloat(document.getElementById("time").value);
+      const doubleTime = parseFloat(document.getElementById("doubleTime").value);
+
+      // Calcular la población final
+      const finalPopulation = calculateFinalPopulation(initialPopulation, time, doubleTime);
+
+      // Mostrar el resultado
+      document.getElementById("finalPopulation").value = finalPopulation.toFixed(2);
+    }
+
+    // Obtener el formulario y agregar el evento de envío
+    const form = document.getElementById("populationForm");
+    form.addEventListener("submit", handleFormSubmit);
+  </script>
+</body>
+</html>
